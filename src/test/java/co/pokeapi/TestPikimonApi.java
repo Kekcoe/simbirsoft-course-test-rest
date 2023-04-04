@@ -28,11 +28,9 @@ public class TestPikimonApi {
                .statusCode(200)
                 .extract().asString();
 
-       Pikimon pikimon = objectMapper.readValue(json, Pikimon.class);
-       // System.out.println(pikimon.getAbilities());
-        Map<String, Object> map
-                = objectMapper.readValue(json, new TypeReference<>(){});
-        System.out.println(map.get("abilities"));
+      Pikimon pidgeotto = objectMapper.readValue(json, Pikimon.class);
+
+        System.out.println(pidgeotto.getAbilities().get(0).getAbility().getName());
     }
 
 
