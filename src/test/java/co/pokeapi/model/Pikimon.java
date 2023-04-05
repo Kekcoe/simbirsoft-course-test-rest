@@ -9,8 +9,9 @@ import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Pikimon {
-
-    public ArrayList<Ability> abilities;
+    private String name;
+    private ArrayList<Ability> abilities;
+    private int weight;
 
     public Pikimon() {}
 
@@ -20,5 +21,21 @@ public class Pikimon {
 
     public void setAbilities(ArrayList<Ability> abilities) {
         this.abilities = abilities;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
     }
 }
