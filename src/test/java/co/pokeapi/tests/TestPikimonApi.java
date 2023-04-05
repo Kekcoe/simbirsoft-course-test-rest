@@ -2,6 +2,7 @@ package co.pokeapi.tests;
 
 import co.pokeapi.model.Pikimon;
 import co.pokeapi.steps.StepsForTest;
+import co.pokeapi.utils.ConfigurationProperties;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,8 +16,8 @@ public class TestPikimonApi extends BaseTest {
     @BeforeEach
     void setUp() {
         try {
-            pidgeotto = getPikimon(PIDGEOTTO);
-            rattata = getPikimon(RATTATA);
+            pidgeotto = getPikimon(ConfigurationProperties.getProperty("pidgeotto"));
+            rattata = getPikimon(ConfigurationProperties.getProperty("rattata"));
         } catch (JsonProcessingException e) {
             System.out.println("Error processing JSON: " + e.getMessage());
         }
@@ -24,10 +25,8 @@ public class TestPikimonApi extends BaseTest {
 
     @Test
     void testName() {
-        String expectedNamePidgeotto = PIDGEOTTO;
-        String expectedNameRATTATA = RATTATA;
-        Assertions.assertEquals(expectedNamePidgeotto, pidgeotto.getName(), "Name of Pidgeotto does not match");
-        Assertions.assertEquals(expectedNameRATTATA, rattata.getName(), "Name of Rattata does not match");
+        Assertions.assertEquals("pidgeotto", pidgeotto.getName(), "Name of Pidgeotto does not match");
+        Assertions.assertEquals("rattata", rattata.getName(), "Name of Rattata does not match");
     }
 
     @Test
@@ -44,7 +43,7 @@ public class TestPikimonApi extends BaseTest {
     @Test
     void pikimonListTest(){
         String countOfPikimons =  requestSpecification.get().then().extract().path("count").toString();
-        System.out.println(countOfPikimons);
+        Assertions.assertEquals("1279",countOfPikimons,"List of pikimons must contains 1279");
     }
 
     private Pikimon getPikimon(String pikoName) throws JsonProcessingException {
@@ -55,5 +54,4 @@ public class TestPikimonApi extends BaseTest {
                 .extract().asString();
         return stepsForTest.getPikimon(jsonPikimon);
     }
-
 }
