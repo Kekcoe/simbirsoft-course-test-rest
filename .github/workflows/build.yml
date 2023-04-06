@@ -1,5 +1,5 @@
 name: Build and Test
-run-name: ${{ github.actor }} tests https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager
+run-name: ${{ github.actor }} tests PokéAPI (pokeapi.co)
 
 on:
   push:
