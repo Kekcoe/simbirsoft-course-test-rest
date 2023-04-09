@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Pikimon {
     private String name;
@@ -34,7 +33,6 @@ public class Pikimon {
     public int getWeight() {
         return weight;
     }
-
     public void setWeight(int weight) {
         this.weight = weight;
     }
