@@ -4,7 +4,6 @@ import co.pokeapi.model.Pikimon;
 import co.pokeapi.steps.StepsForTest;
 import co.pokeapi.utils.ConfigurationProperties;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import io.qameta.allure.Allure;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Step;
@@ -62,22 +61,15 @@ public class TestPikimonApi extends BaseTest {
             "ограниченном списке есть имя (name)")
     @Step("pikimonListTest")
     void pikimonListTest() {
-        Response response = requestSpecification.get();
-        int countOfPikimons = response.jsonPath().getList("results").size();
+        Response response = requestSpecification
+                                .queryParam("limit", 30)
+                                .queryParam("offset", 20)
+                                .get();
+
+        int limit = response.jsonPath().getList("results").size();
         List<String> pokemonNames = response.jsonPath().getList("results.name");
         pokemonNames.removeAll(Collections.singleton(null));
-        Assertions.assertEquals(20, countOfPikimons, "List of pikimons must contains 20 pics");
-        Assertions.assertEquals(20, pokemonNames.size(), "not all Pikemon have a name");
-    }
-
-    @Step("Create Pikimon")
-    private Pikimon getPikimon(String pikoName) throws JsonProcessingException {
-        String jsonPikimon = requestSpecification
-                .get(pikoName).then()
-                .assertThat()
-                .statusCode(200)
-                .extract().asString();
-        Allure.addAttachment("jsonPikimon", "application/json", jsonPikimon);
-        return stepsForTest.getPikimon(jsonPikimon);
+        Assertions.assertEquals(30, limit, "List of pikimons must contains 30 pics");
+        Assertions.assertEquals(30, pokemonNames.size(), "not all Pikemon have a name");
     }
 }

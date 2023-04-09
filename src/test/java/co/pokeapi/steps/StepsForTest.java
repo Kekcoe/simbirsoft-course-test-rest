@@ -12,11 +12,6 @@ public class StepsForTest {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    @Step("get pikimon with Jackson objectmapper")
-    public Pikimon getPikimon(String jsonPiki) throws JsonProcessingException {
-        return objectMapper.readValue(jsonPiki, Pikimon.class);
-    }
-
     @Step("check ability")
     public Boolean checkAbility(List<Ability> abilities, String abilityName){
         for (Ability ability :abilities) {
