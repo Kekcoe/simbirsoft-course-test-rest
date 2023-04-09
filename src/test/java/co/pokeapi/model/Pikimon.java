@@ -3,19 +3,39 @@ package co.pokeapi.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
+
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Pikimon {
-    Map<String, Object> abilities;
+    private String name;
+    private ArrayList<Ability> abilities;
+    private int weight;
 
     public Pikimon() {}
 
-    public Map<String, Object> getAbilities() {
+    public List<Ability> getAbilities() {
         return abilities;
     }
 
-    public void setAbilities(Map<String, Object> abilities) {
+    public void setAbilities(ArrayList<Ability> abilities) {
         this.abilities = abilities;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
     }
 }
